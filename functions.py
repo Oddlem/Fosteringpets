@@ -3,7 +3,7 @@ from pygame.locals import *
 import os
 import sys
 import random
-from main import creature_sprites
+from main import *
 
 from pygame.sprite import Group
 
@@ -12,7 +12,25 @@ from pygame.sprite import Group
 
 # Functions:
 
+def character_movement_true():
+    if event.key == K_LEFT or event.key == K_a:
+        player_instance.rect.move_ip(-1,0)
+    if event.key == K_RIGHT or event.key == K_d:
+        player_instance.rect.move_ip(1,0)
+    if event.key == K_DOWN or event.key == K_s:
+        player_instance.rect.move_ip(0,1)
+    if event.key == K_UP or event.key == K_w:
+        player_instance.rect.move_ip(0,-1)
 
+def character_movement_false():
+    if event.key == K_LEFT or event.key == K_a:
+        player_instance.rect.move_ip(0,0)
+    if event.key == K_RIGHT or event.key == K_d:
+        player_instance.rect.move_ip(0,0)
+    if event.key == K_DOWN or event.key == K_s:
+        player_instance.rect.move_ip(0,0)
+    if event.key == K_UP or event.key == K_w:
+        player_instance.rect.move_ip(0,0)
         
 
 # ***** WILL RETURN TO THIS WHEN I FINISH MODUALIZING *****
