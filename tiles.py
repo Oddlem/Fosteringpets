@@ -8,10 +8,3 @@ textures = {
     "Dark_dirt": pygame.image.load("tiles\\dirt2.png"),
     "dirt": pygame.image.load("tiles\\dirt.png"),
 }
-
-# A test to see if the dictionary works
-print(textures)
-
-# tilemap = [
-#     []
-# ]

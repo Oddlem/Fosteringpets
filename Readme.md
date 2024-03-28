@@ -16,14 +16,14 @@ The purpose of this game is to be a goblin, and take care of the wounded creatur
 
 To tell the truth, it has absolutely been challenging solely using pygame, but so far that hasn't stopped me and I've overcome almost all obstacles I've encountered so far. Everything I've implemented was a challenge and required me grasping a deeper understanding of the libray I've been using, as well as some general concepts such as OOP and optimization. I will start keeping a devlog of any problems I encounter in the future, and what I did to overcome them.
 
-As an example of an obstance, I wanted to have each creature have it's own special image. I COULD simply just create objects using an image and it's path, but it looked really bad and wasn't very readable. Instead, I opted to use a dictionary, use the creature's name as the key and the image as the value, and retrieve it using the creature_retriever function. This function was just a simple for loop that would automatically find the image using the key I inserted into the "image" field. By doing things this way, it looks much more clean than if I were to lazily insert the image path in that field instead.
+As an example of an obstacle, I wanted to have each creature have it's own special image. I COULD simply just create objects using an image and it's path, but it looked really bad and wasn't very readable. Instead, I opted to use a dictionary, use the creature's name as the key and the image as the value, and retrieve it using the creature_retriever function. This function was just a simple for loop that would automatically find the image using the key I inserted into the "image" field. By doing things this way, it looks much more clean than if I were to lazily insert the image path in that field instead.
 
 -----------------------------------------------------------------
 
 What I did:
-1. Appearances of multiple creatures on the screen at once (using objects and not drawing instances of classes on the screen). 
-2. Finding a way to put the if statements regarding player movement into a function. 
+1. A function that automatically blits tiles on the screen
+2. The ability to show a dialogue window by pressing "e".
 
 What I will do in the next repository:
-1. A system for generating tiles, and adding ground collision. This proved to be much more complex than I originally thought and so I'd need to take more time to learn how to implement this.
-2. The ability to interact with creatures by pressing the "e" button.
+1. Finding a way to create dialogue trees, and link them to a specific creature.
+2. Polishing the "e" functionality, and making it so that it can only trigger the dialogue window to appear when pressed near a creature.

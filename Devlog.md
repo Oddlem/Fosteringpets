@@ -11,10 +11,29 @@ Created multiple creature objects, implemented a dictionary containing their nam
 
 
 3/13/2024
-Cleaned the main file, organized the folders. Put gif_test.gif and harold.png in "images", from "placeholder_images". I attempted to modualize, however I continued running into the  problem of circular dependancy. I decided it would be beneficial to study this more and come back at a later time so that I can focus more on fixing other problems. I ran into problems adding multiple creatures on screen, though the problem was simply that I wasn't adding them correctly to the sprite group correctly and it ended up working.
+Cleaned the main file, organized the folders. Put gif_test.gif and harold.png in "images", from "placeholder_images". I attempted to modualize, however I continued running into the  problem of circular dependancy. I decided it would be beneficial to study this more and come back at a later time so that I can focus more on fixing other problems. I ran into issues adding multiple creatures on screen, though the problem was simply that I wasn't adding them correctly to the sprite group and it ended up working.
 
 Summary:
 -Added a readme and this devlog. 
 -Added the ability to draw multiple objects (creatures) on the screen, with working collision. 
 -Simplified player movement into functions.
 -Organized the main file.
+
+3/14/2024
+Created tile images and attempted to create a system to blit them across the screen. Originally tried using sprites, but switched to simply blitting them due to better performance. An algorithm to do this was successfully made using two stacking for loops, however, creating blocks with collision may still present as a problem. These may have to be sprites.
+
+3/15/2024
+Began working on creating specific tiles with collision, started using a similar loop that was used to make a box of wall tiles, but it wouldn't give any room for customization. Also, the biggest problem is that the player will move from room to room using doors, which wouldn't work with the system I wanted to use. I'd have to use only ONE kind of block and I wouldn't be able to choose where they go. What if I don't want the room to be a square and I wanted it to be a circle? How will they leave if there's no way to create an "exit"?
+
+I'm now planning on implementing a system that allows me to create and store tiles in a list. 
+
+3/26/2024
+Decided to not go forward with creating a collision system for maps, since it's more of a priority to have a working prototype ready. Instead, I will disallow the player to move off-screen as a temporary fix. For today, I'm simply going to implement the ability for the player to interact with sprites using "e".
+
+3/28/2024
+Successfully added the ability to use "e" to prompt a dialogue box to appear. However, it it ONLY triggered by the player pressing said button, not by it's intended purpose of talking to the creatures. In other words, simply pressing this button will show someone "talking." The next priority is to implement a system where if the player is within a specific range of a creature, THEN pressing "e" reveals a dialogue window.
+
+Summary for this repository:
+-Created a function that automatically renders tiles across the entire screen
+-Cleaned up and organized some code in the main file, removed some unnecessary lines.
+-The appearance of a dialogue box once the player pressed "e".
