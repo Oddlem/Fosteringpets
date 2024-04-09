@@ -51,3 +51,10 @@ The first bug was due to problems with another I had created called find_distanc
 Other than fixing these bugs, I cleaned up the files (and have plans for how I want to better organize them in the future, I might work on this soon), and made it so that distance_check checks for a CREATURE and not the difference between them. I tried making a very rough dialogue tree but... it's way more complex than I thought and it kept throwing errors, so I reverted it back to what it was before. It now works again, and I need to step back and figure out a strategy as to why my mini-dialogue tree didn't work. The error message was extremely complex but supposedly it traced back to dialogue_box.rebuild() in main. The syntax in the JSON file is correct, which is another reason why I suspect something in dialogue_box_trigger causing it. I think I need to redo the way the boxes are rendered, but I need to think of a clear plan first and foremost.
 
 Next time, I will instead focus on not letting the player move off screen. For the long term, though, I think I should rework some things to include game states since after researching, they seem to be extremely important and it'll only get harder to implement the more things I add.
+
+4/8/2024
+After sleeping and waking up with a clear head this morning, I think I know how to tackle the game state problem. I think I do need to make each screen a different class but... oh no, this will be a huge pain and I'll have to rewrite a lot of core parts of the game. But I think this might be the best way to handle it. I also just rememebered that wall tiles technically WORK, I just don't have a way to map them out, so that's another thing I could research how to do.
+
+Summary for this repository:
+-Fixed bugs, removed usage of global variables in some functions. Optimized some functions.
+-Implemented a working dialogue box, displaying text that is unique to each character.

@@ -1,29 +1,7 @@
-I've always wanted to create a game, and tell a story. That's most artists' dream, right?
+Remade this file so that it explains what all the code does
 
------------------------------------------------------------------
-
-Since I've been learning python, naturally, I gravitated towards game development and how I could make my own game. I understood that python is by no means the best way to do this, but I thought I'd learn a lot about programming itself as well as optimization. After all, good optimization would be crucial since pygame runs pretty slow. I saw this as a challenge, as a way to create a prototype for a much larger project. 
-
-You're seeing this prototype, which I will continue to update until I determine it's no longer viable to keep using pygame. It's still very much in it's baby stage, though it took a lot of learning and practice to get it to this point in the first place. 
-
-So far, within the course of 3 days, I've implemented: Player movement, collision, and creature classes/objects.
-
------------------------------------------------------------------
-
-The purpose of this game is to be a goblin, and take care of the wounded creatures you encounter. Then, once they're healthy, you set them free. Each creature has it's own quirks and needs, making it so that the player has to figure out what special care they need to become healthy again.
-
------------------------------------------------------------------
-
-To tell the truth, it has absolutely been challenging solely using pygame, but so far that hasn't stopped me and I've overcome almost all obstacles I've encountered so far. Everything I've implemented was a challenge and required me grasping a deeper understanding of the libray I've been using, as well as some general concepts such as OOP and optimization. I will start keeping a devlog of any problems I encounter in the future, and what I did to overcome them.
-
-As an example of an obstacle, I wanted to have each creature have it's own special image. I COULD simply just create objects using an image and it's path, but it looked really bad and wasn't very readable. Instead, I opted to use a dictionary, use the creature's name as the key and the image as the value, and retrieve it using the creature_retriever function. This function was just a simple for loop that would automatically find the image using the key I inserted into the "image" field. By doing things this way, it looks much more clean than if I were to lazily insert the image path in that field instead.
-
------------------------------------------------------------------
-
-What I did:
-1. A function that automatically blits tiles on the screen
-2. The ability to show a dialogue window by pressing "e".
-
-What I will do in the next repository:
-1. Finding a way to create dialogue trees, and link them to a specific creature.
-2. Polishing the "e" functionality, and making it so that it can only trigger the dialogue window to appear when pressed near a creature.
+Everything is separated into moduals, though that probably goes without saying. Here's what each modual does:
+-main.py contains classes, functions, and some objects that were created.
+-assets.py imports raw visual data (because of this, dialogue box doesn't belong in here since it's created via pygame_gui). This includes spritesheets and tilesets.
+-config.py contains certain booleans (for example, character_can_move), anything handling dialogue or dialogue boxes, and vital pygame calls (like pygame.init()).
+-main_game_loop.py contains the actual game loop, along with some calls that can't be put anywhere else due to circular dependancy problems.
