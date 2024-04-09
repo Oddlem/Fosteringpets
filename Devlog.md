@@ -37,3 +37,17 @@ Summary for this repository:
 -Created a function that automatically renders tiles across the entire screen
 -Cleaned up and organized some code in the main file, removed some unnecessary lines.
 -The appearance of a dialogue box once the player pressed "e".
+
+3/29/2024
+Added some functions that basically only allowed a dialogue box to appear when the player is within a certain range of a creature. However, it only seems to be working with a single creature-- there's a bug somewhere that I need to find. I also separated the game loop from the main file to make it more clean.
+
+Another bug appeared, now the player can move when the dialogue box appears which... shouldn't happen.
+
+3/30/2024
+As it turned out, the second bug was caused from the implementation of global variables. These were taken out and instead added into a config file; now instead of globals, the variable is imported from this file.
+
+The first bug was due to problems with another I had created called find_distance(). As it turns out, the way if and else statements were used caused the loop to break after only detecting the first creature. 
+
+Other than fixing these bugs, I cleaned up the files (and have plans for how I want to better organize them in the future, I might work on this soon), and made it so that distance_check checks for a CREATURE and not the difference between them. I tried making a very rough dialogue tree but... it's way more complex than I thought and it kept throwing errors, so I reverted it back to what it was before. It now works again, and I need to step back and figure out a strategy as to why my mini-dialogue tree didn't work. The error message was extremely complex but supposedly it traced back to dialogue_box.rebuild() in main. The syntax in the JSON file is correct, which is another reason why I suspect something in dialogue_box_trigger causing it. I think I need to redo the way the boxes are rendered, but I need to think of a clear plan first and foremost.
+
+Next time, I will instead focus on not letting the player move off screen. For the long term, though, I think I should rework some things to include game states since after researching, they seem to be extremely important and it'll only get harder to implement the more things I add.
