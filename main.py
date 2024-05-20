@@ -4,16 +4,14 @@ import os
 from pygame.locals import *
 from pygame.sprite import Group
 from tiles import *
-from dialogue import *
 from config import *
 from assets import *
 import config
 
 
 # ** This function needs to be here **
-def creature_retriever(creature):
-    return creature_sprites.get(creature)
-
+def image_retriever(group, image):
+    return group.get(image)
 
 # ** Game States **
 class Player_Cave():
@@ -30,42 +28,43 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
 class Creature(pygame.sprite.Sprite):
-    def __init__(self, name, x, y, image, is_hurt):
+    def __init__(self, name, x, y, image):
         super().__init__()
         self.name = name
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
-        self.is_hurt = True
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-class Nonwalkable_tiles(pygame.sprite.DirtySprite):
-    def __init__(self, image):
-        super().__init__()
-        self.image = image
-        self.rect = self.image.get_rect()
-
 class Object(pygame.sprite.Sprite):
-    def __init__(self, x, y, image):
+    def __init__(self, name, x, y, image):
         super().__init__()
+        self.name = name
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
 
 
 # ** Objects, sprites, and more **
 
 # Player
-player_instance = Player(300, 400, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'gif_test.gif')))
 player_group = pygame.sprite.Group()
+player_instance = Player(300, 400, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'gif_test.gif')))
 player_group.add(player_instance)
 
 # Creatures
 creature_group = pygame.sprite.Group()
-harold = Creature("harold", 900, 500, creature_retriever("harold"), True)
-mango = Creature("mango", 700, 300, creature_retriever("mango"), True)
+harold = Creature("harold", 900, 500, image_retriever(creature_sprites, "harold"))
+mango = Creature("mango", 700, 300, image_retriever(creature_sprites, "mango"))
 creature_group.add(harold, mango)
+
+# Objects
+# object_group = pygame.sprite.Group()
+# mysterious_potion = Object("mysterious_potion", 500, 300, image_retriever(object_sprites, "m_potion"))
+# object_group.add(mysterious_potion)
 
 solid_objects = [
     harold,
@@ -74,26 +73,15 @@ solid_objects = [
 
 creature_rects = [creature.rect for creature in creature_group]
 
-# **Tile Collision **
-colliding_tiles = pygame.sprite.spritecollide(player_instance, tiles_group, False)
-
 
 # ** Functions **
-def draw_background(screen, image, rows, columns, non_walkable_group):
+def draw_background(screen, image, rows, columns):
     for y in range(rows):
         for x in range(columns):
             screen.blit(image, (x * tile_size, y * tile_size))
-    for tile in non_walkable_group:
-        screen.blit(tile.image, tile.rect)
 
-# def generate_room(group, x, y, width, height, tile_size, tile_image):
-#     for y in range(y, y + height):
-#         for x in range(x, x + height):
-#             if y == y or y == y + height - 1 or x == x + width - 1:
-#                 tile = Nonwalkable_tiles(tile_image)
-#                 tile.rect.x = x * tile_size
-#                 tile.rect.y = y * tile_size
-#                 group.add(tile)
+def draw_tiles(x, y, ):
+    pass
 
 # Calculates distance between two objects' rects
 def distance_rects(rect1, rect2):
@@ -105,12 +93,7 @@ def get_creature_within_threshold(player, creatures, threshold):
         distance = distance_rects(player, creature.rect)
         if distance < threshold:
             return creature
-
     return None 
-
-# def offscreen_check():
-#     if player_instance.rect.x > 0 and player_instance.y > 0:
-#         config.character_can_move = False
 
 def dialogue_box_trigger(event):
     if event.type == pygame.KEYUP and event.key == pygame.K_e:
@@ -127,3 +110,5 @@ def dialogue_box_trigger(event):
                 dialogue_box.show()
             else:
                 dialogue_box.hide()
+
+# Rework this function to where it ALSO checks for an object. If that returns true, the object is added to the player's inventory.

@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from pygame.sprite import Group
 from tiles import *
-from dialogue import *
 from main import *
 from config import *
 from assets import *
@@ -45,9 +44,10 @@ while config.running:
     mango.update()
     manager.update(dt)
 
-    draw_background(screen, background, 8, 13, tiles_group)
+    draw_background(screen, background, 8, 13)
     harold.draw(screen)
     mango.draw(screen)
     player_group.draw(screen)
+    player_instance.rect.clamp_ip(screen_rect)
     manager.draw_ui(screen)
     pygame.display.update()
