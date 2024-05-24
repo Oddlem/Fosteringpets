@@ -59,12 +59,15 @@ player_group.add(player_instance)
 creature_group = pygame.sprite.Group()
 harold = Creature("harold", 900, 500, image_retriever(creature_sprites, "harold"))
 mango = Creature("mango", 700, 300, image_retriever(creature_sprites, "mango"))
-creature_group.add(harold, mango)
+dringus = Creature("dringus", 400, 200, image_retriever(creature_sprites, "dringus"))
+# I'm keeping it so you can walk through dringus cause I thought it was funny :)
+creature_group.add(harold, mango, dringus)
 
 # Objects
-# object_group = pygame.sprite.Group()
-# mysterious_potion = Object("mysterious_potion", 500, 300, image_retriever(object_sprites, "m_potion"))
-# object_group.add(mysterious_potion)
+object_group = pygame.sprite.Group()
+mysterious_potion = Object("mysterious_potion", 500, 400, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'water_potion.png')))
+m_bed = Object("m_bed", 900, 150, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'goblin_bed.png')))
+object_group.add(mysterious_potion, m_bed)
 
 solid_objects = [
     harold,
@@ -75,13 +78,18 @@ creature_rects = [creature.rect for creature in creature_group]
 
 
 # ** Functions **
-def draw_background(screen, image, rows, columns):
+# def draw_background(screen, image, rows, columns):
+#     for y in range(rows):
+#         for x in range(columns):
+#             screen.blit(image, (x * tile_size, y * tile_size))
+
+def draw_tiles(screen, rows, columns):
     for y in range(rows):
         for x in range(columns):
+            key = tilemap_cave[y][x]
+            image = cave_textures[key]
             screen.blit(image, (x * tile_size, y * tile_size))
 
-def draw_tiles(x, y, ):
-    pass
 
 # Calculates distance between two objects' rects
 def distance_rects(rect1, rect2):
@@ -97,7 +105,7 @@ def get_creature_within_threshold(player, creatures, threshold):
 
 def dialogue_box_trigger(event):
     if event.type == pygame.KEYUP and event.key == pygame.K_e:
-        creature = get_creature_within_threshold(player_instance.rect, creature_group, 200)
+        creature = get_creature_within_threshold(player_instance.rect, creature_group, 125)
         if creature != None:
             config.show_dialogue_box = not config.show_dialogue_box
             config.character_can_move = not config.character_can_move

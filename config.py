@@ -9,7 +9,7 @@ screen_rect = screen.get_rect()
 clock = pygame.time.Clock()
 pygame.key.set_repeat(True)
 
-manager = pygame_gui.UIManager((1300, 800))
+manager = pygame_gui.UIManager((1300, 800), theme_path="UI_config.JSON")
 
 map_width = 8
 map_height = 13

@@ -1,0 +1,19 @@
+{
+    "text_box":
+    {
+        "colours":
+        {
+            "normal_text": "white"
+        },
+        "font":
+        {
+            "size": "20"
+        },
+        "misc":
+        {
+            "border_width": "5",
+            "text_horiz_alignment_padding": "30",
+            "text_vert_alignment_padding": "20"
+        }
+    }
+}
