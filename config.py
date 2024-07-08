@@ -20,6 +20,9 @@ dialogue = {}
 with open('dialogue.json') as file:
   dialogue = json.load(file)
 
+text = {}
+with open('item_descriptions.json') as file:
+  text = json.load(file)
 
 running = True
 character_can_move = True

@@ -26,10 +26,11 @@ while config.running:
             config.running = False
         manager.process_events(event)
         dialogue_box_trigger(event)
+        text_box_trigger(event)
         if event.type == pygame.KEYDOWN:
             character_movement()
-            for character in solid_objects:
-                if pygame.Rect.colliderect(player_instance.rect, character.rect):
+            for thing in solid_objects:
+                if pygame.Rect.colliderect(player_instance.rect, thing.rect):
                     if event.key == K_LEFT or event.key == K_a:
                         player_instance.rect.move_ip(1,0)
                     if event.key == K_RIGHT or event.key == K_d:
@@ -40,20 +41,14 @@ while config.running:
                         player_instance.rect.move_ip(0,1)
 
     player_group.update()
-    harold.update()
-    mango.update()
-    dringus.update()
-    mysterious_potion.update()
-    m_bed.update()
+    creature_group.update()
+    object_group.update()
     manager.update(dt)
 
     # draw_background(screen, background, 8, 13)
     draw_tiles(screen, 8, 13)
-    harold.draw(screen)
-    mango.draw(screen)
-    dringus.draw(screen)
-    mysterious_potion.draw(screen)
-    m_bed.draw(screen)
+    creature_group.draw(screen)
+    object_group.draw(screen)
     player_group.draw(screen)
     player_instance.rect.clamp_ip(screen_rect)
     manager.draw_ui(screen)

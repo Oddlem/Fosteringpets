@@ -24,28 +24,34 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, image):
         super().__init__()
         self.image = image
-        self.rect = self.image.get_rect()
+        self.rect = Rect(200, 200, 90, 90)
         self.rect.center = (x, y)
 
 class Creature(pygame.sprite.Sprite):
-    def __init__(self, name, x, y, image):
+    def __init__(self, name, x, y, size_x, size_y, image):
         super().__init__()
         self.name = name
         self.image = image
-        self.rect = self.image.get_rect()
+        self.rect = Rect(x, y, size_x, size_y)
         self.rect.center = (x, y)
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
 class Object(pygame.sprite.Sprite):
-    def __init__(self, name, x, y, image):
+    def __init__(self, name, x, y, size_x, size_y, image):
         super().__init__()
         self.name = name
         self.image = image
-        self.rect = self.image.get_rect()
+        self.rect = Rect(x, y, size_x, size_y)
         self.rect.center = (x, y)
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+
+class AnimatedSprite(pygame.sprite.Sprite):
+    def __init__():
+        pass
+    def update():
+        pass
 
 
 # ** Objects, sprites, and more **
@@ -57,24 +63,28 @@ player_group.add(player_instance)
 
 # Creatures
 creature_group = pygame.sprite.Group()
-harold = Creature("harold", 900, 500, image_retriever(creature_sprites, "harold"))
-mango = Creature("mango", 700, 300, image_retriever(creature_sprites, "mango"))
-dringus = Creature("dringus", 400, 200, image_retriever(creature_sprites, "dringus"))
+harold = Creature("harold", 900, 600, 120, 90, image_retriever(creature_sprites, "harold"))
+mango = Creature("mango", 700, 300, 90, 90, image_retriever(creature_sprites, "mango"))
+dringus = Creature("dringus", 400, 200, 90, 90, image_retriever(creature_sprites, "dringus"))
 # I'm keeping it so you can walk through dringus cause I thought it was funny :)
 creature_group.add(harold, mango, dringus)
 
 # Objects
 object_group = pygame.sprite.Group()
-mysterious_potion = Object("mysterious_potion", 500, 400, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'water_potion.png')))
-m_bed = Object("m_bed", 900, 150, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'goblin_bed.png')))
+# end_table = Object("end_table", 700, 150, pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'end_table.png')))
+mysterious_potion = Object("m_potion", 700, 125, 45, 45, image_retriever(object_sprites, "M_potion"))
+m_bed = Object("m_bed", 900, 150, 95, 95, image_retriever(object_sprites, "m_bed"))
 object_group.add(mysterious_potion, m_bed)
 
 solid_objects = [
     harold,
-    mango
+    mango,
+    mysterious_potion,
+    m_bed
 ]
 
 creature_rects = [creature.rect for creature in creature_group]
+# object_rects = [object.rect for object in object_group]
 
 
 # ** Functions **
@@ -96,16 +106,22 @@ def distance_rects(rect1, rect2):
     return ((rect1.x - rect2.x) ** 2 + (rect1.y - rect2.y) ** 2) ** 0.5
 
 # Returns the first creature within a threshold 
-def get_creature_within_threshold(player, creatures, threshold):
-    for creature in creatures:
-        distance = distance_rects(player, creature.rect)
+def get_thing(player, thingies, threshold):
+    for thing in thingies:
+        distance = distance_rects(player, thing.rect)
         if distance < threshold:
-            return creature
+            return thing
     return None 
+
+def load_text(name, file):
+    content = {}
+    with open(name) as file:
+        content = json.load(file)
+        return content
 
 def dialogue_box_trigger(event):
     if event.type == pygame.KEYUP and event.key == pygame.K_e:
-        creature = get_creature_within_threshold(player_instance.rect, creature_group, 125)
+        creature = get_thing(player_instance.rect, creature_group, 125)
         if creature != None:
             config.show_dialogue_box = not config.show_dialogue_box
             config.character_can_move = not config.character_can_move
@@ -119,4 +135,27 @@ def dialogue_box_trigger(event):
             else:
                 dialogue_box.hide()
 
-# Rework this function to where it ALSO checks for an object. If that returns true, the object is added to the player's inventory.
+# Add a check for whichever object is the closest, and you return THAT
+def text_box_trigger(event):
+    if event.type == pygame.KEYUP and event.key == pygame.K_e:
+        object = get_thing(player_instance.rect, object_group, 125)
+        if object != None:
+            config.show_dialogue_box = not config.show_dialogue_box
+            config.character_can_move = not config.character_can_move
+            if (config.show_dialogue_box):
+                name = object.name
+                text = config.text[name]
+
+                dialogue_box.html_text = text
+                dialogue_box.rebuild()
+                dialogue_box.show()
+            else:
+                dialogue_box.hide()
+
+def box_trigger(event):
+    if event.type == pygame.KEYUP and event.key == pygame.K_e:
+        thing = get_thing(player_instance.rect, )
+
+# next time I'll fix the objects, and I'll also separate items and objects in order to be able to add items to the player's inventory later on
+
+# I also wanna make it so that in order for e to activate, you have to be facing towards something. This will be after I make and add sprites for each direction

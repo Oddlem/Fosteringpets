@@ -14,6 +14,7 @@ creature_sprites = {
 object_sprites = {
     "M_potion": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'water_potion.png')),
     "m_bed": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'goblin_bed.png')),
+    "end_table": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'end_table.png')),
 }
 
 # nonwalkable_dirt = pygame.image.load("tiles\\dirt2.png")
