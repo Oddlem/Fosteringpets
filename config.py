@@ -15,6 +15,8 @@ map_width = 8
 map_height = 13
 tile_size = 100
 
+dt = clock.tick(60)/1000.0
+
 # This is here so that text can be looped through and placed in the dialogue box.
 dialogue = {}
 with open('dialogue.json') as file:

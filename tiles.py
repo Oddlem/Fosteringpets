@@ -1,7 +1,5 @@
 import pygame
 from pygame.locals import *
-import os
-import sys
 from pygame.sprite import Group
 
 cave_textures = {
@@ -20,7 +18,6 @@ cave_textures = {
     13: pygame.image.load("tiles\\light_dirt_kinda.png"),
 }
 
-# Testing out different ways to make tilemaps
 
 tilemap_cave = [
     [3,3,3,3,3,3,3,3,3,3,3,3,3],

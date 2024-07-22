@@ -2,10 +2,10 @@ import pygame
 import os
 
 
+# reminder: when I have the chance, I need to clean this up lol
 # Creatures
 creature_sprites = {
     "mango": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'manga_anime.png')),
-    "cool ross": pygame.image.load(os.path.join(os.path.dirname(__file__), 'placeholder_images', 'ross_spritev.png')),
     "harold": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'harold.png')),
     "dringus": pygame.image.load(os.path.join(os.path.dirname(__file__), 'images', 'dringus.png'))
 }
