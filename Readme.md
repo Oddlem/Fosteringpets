@@ -1,8 +1,9 @@
-Remade this file so that it explains what all the code does
+A game that currently serves as a sandbox; you interact with creatures and have to nurse them back to health. The project was created entirely in Pygame (a gamedev library for python), every system being implemented manually.
+
+![oddlem-uPJ2_J_9O5FAhnJS7UFcx-python_BDKzn37Ych](https://github.com/user-attachments/assets/7d96d6f1-9cfb-4554-b9ea-2110883f87cd)
 
 
-
-Everything is separated into moduals, though that probably goes without saying. Here's what each modual does:
+Module Directory:
 
 -main.py contains classes, functions, and some objects that were created.
 
